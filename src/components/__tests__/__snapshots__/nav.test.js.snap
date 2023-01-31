@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders nav component 1`] = `
+<div
+  className="Nav"
+>
+  <header
+    className="nav-title"
+  >
+    <div>
+      Test
+    </div>
+  </header>
+  <div
+    className="nav-container"
+  >
+    <div
+      className="nav-item"
+    >
+      <button
+        className="nav-clear-button"
+      >
+        <img
+          alt="search"
+          className="nav-menu"
+          src="bars-solid.svg"
+        />
+      </button>
+    </div>
+    <div
+      className="nav-item"
+    >
+      <div
+        className="nav-location"
+      >
+        <div>
+          Subtest
+        </div>
+      </div>
+    </div>
+    <div
+      className="nav-item"
+    >
+      <button
+        className="nav-clear-button"
+      >
+        <img
+          alt="search"
+          className="nav-search"
+          src="magnifying-glass-solid.svg"
+        />
+      </button>
+    </div>
+  </div>
+  <div
+    className="line"
+  />
+  <div />
+</div>
+`;

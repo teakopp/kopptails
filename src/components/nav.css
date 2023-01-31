@@ -1,0 +1,45 @@
+/*Title for nav page*/
+.nav-title {
+  text-align: center;
+  font-size: 96px;
+  height: 120px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-item {
+  width: 800px;
+  text-align: center;
+}
+
+.nav-menu {
+  height: 40px;
+  width: 40px;
+}
+
+.nav-location {
+  font-size: 32px;
+}
+
+.nav-search {
+  height: 40px;
+  width: 40px;
+}
+
+.line {
+  border: 2px solid black;
+  border-radius: 1px;
+}
+
+.nav-clear-button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
