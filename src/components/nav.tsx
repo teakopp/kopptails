@@ -33,7 +33,7 @@ class Nav extends React.Component<NavProps, NavState> {
   render(){
     let sideMenu;
     if (this.state.sidebarOpen){
-     sideMenu = <SideBar items={["Discover","Suprise Me"]}/> 
+     sideMenu = <SideBar items={["Discover","Suprise Me"]} handleClick={this.handleClick}/> 
     }
     return (
       <div className="Nav">
