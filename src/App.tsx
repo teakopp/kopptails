@@ -8,6 +8,8 @@ function App() {
       <header className="App-header">
         <Nav title="Cocktails" subtitle="Welcome" />
       </header>
+      <div>
+      </div>
     </div>
   );
 }
