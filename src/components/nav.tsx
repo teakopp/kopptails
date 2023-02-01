@@ -37,17 +37,14 @@ class Nav extends React.Component<NavProps, NavState> {
     }
     return (
       <div className="Nav">
-	<header className="nav-title">
-	  <div>{this.props.title}</div>
-	</header>
 	<div>{sideMenu}</div>
 	<div className="nav-container">
 	    <div className="nav-item">
 	      <IconButton handleClick={this.handleClick} src={menu} alt="menu" />
 	  </div>
 	  <div className="nav-item">
-	    <div className="nav-location">
-	      <div>{this.props.subtitle}</div>
+	    <div className="nav-title">
+	      <div>{this.props.title}</div>
 	    </div>
 	  </div>
 	  <div className="nav-item">
@@ -55,7 +52,6 @@ class Nav extends React.Component<NavProps, NavState> {
 	  </div>
 	</div>
 	<div className="line"></div>
-	<div></div>
       </div>
     );
   }
