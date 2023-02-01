@@ -1,0 +1,8 @@
+.grid{
+  display: flex;
+  flex-wrap:wrap;
+  margin-right: 25%;
+  margin-left: 25%;
+  gap: 1.5%;
+  position: fixed;
+}
