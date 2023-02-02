@@ -1,71 +1,84 @@
 import React from "react";
-import "./grid.css"
-import Item from "./item"
-import {ItemProps} from "./item"
-import { getRandomDrink } from "../services/drinks"
+import "./grid.css";
+import Item from "./item";
+import { ItemProps } from "./item";
+import { getRandomDrink } from "../services/drinks";
 
-interface GridProps{
+interface GridProps {
   pageStatus: string;
 }
 
-interface GridState{
-  gridData : ItemProps[];
+interface GridState {
+  gridData: ItemProps[];
 }
 
-class Grid extends React.Component<GridProps, GridState>{
-  
-  constructor(props:GridProps){
+class Grid extends React.Component<GridProps, GridState> {
+  constructor(props: GridProps) {
     super(props);
-    this.state = {gridData :[{ "id":"0","src":"", "title":"Test","description":"Test description"}]}
+    this.state = {
+      gridData: [
+        { id: "0", src: "", title: "Test", description: "Test description" },
+      ],
+    };
   }
 
-  getRandomDrinks = async () =>{
-      const data = []
-      // Picked number 6 because it seemed like that would be enough to fill page
-      for (let i=0; i < 6; i++){
-	const res = await getRandomDrink()
-	for(let i=0; i < res.drinks.length; i++){
-	  data.push({ "id": res.drinks[i].idDrink,"src":res.drinks[i].strDrinkThumb,"title":res.drinks[i].strDrink,"description":res.drinks[i].strInstructions})
-	}
+  getRandomDrinks = async () => {
+    const data = [];
+    // Picked number 6 because it seemed like that would be enough to fill page
+    for (let i = 0; i < 6; i++) {
+      const res = await getRandomDrink();
+      for (let i = 0; i < res.drinks.length; i++) {
+        data.push({
+          id: res.drinks[i].idDrink,
+          src: res.drinks[i].strDrinkThumb,
+          title: res.drinks[i].strDrink,
+          description: res.drinks[i].strInstructions,
+        });
       }
-      this.setState({gridData:data})
-  }
+    }
+    this.setState({ gridData: data });
+  };
 
-  updateData = async () =>{
-    if (this.props.pageStatus === "Suprise Me"){
-      this.getRandomDrinks()
+  updateData = async () => {
+    if (this.props.pageStatus === "Suprise Me") {
+      this.getRandomDrinks();
     }
-    if (this.props.pageStatus === "Discover"){
-     const data =  [{ "id":"0","src":"", "title":"Test","description":"Test description"}]
-     this.setState({gridData:data})
+    if (this.props.pageStatus === "Discover") {
+      const data = [
+        { id: "0", src: "", title: "Test", description: "Test description" },
+      ];
+      this.setState({ gridData: data });
     }
-  }
+  };
 
   async componentDidMount() {
-    await this.updateData()
+    await this.updateData();
   }
 
-  componentDidUpdate(prevProps:GridProps) {
-
+  componentDidUpdate(prevProps: GridProps) {
     if (prevProps.pageStatus !== this.props.pageStatus) {
-      this.updateData()
+      this.updateData();
     }
   }
 
-
-   render(){
-     return(
-     <div>
-       <div className="grid-container">
-	<div className="grid">
-	  {this.state.gridData.map((item) =><Item id={item.id} title={item.title} src={item.src} description={item.description} />)}
-	</div>
+  render() {
+    return (
+      <div>
+        <div className="grid-container">
+          <div className="grid">
+            {this.state.gridData.map((item) => (
+              <Item
+                id={item.id}
+                title={item.title}
+                src={item.src}
+                description={item.description}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-     )
-   }
-
+    );
+  }
 }
 
-export default Grid
-
+export default Grid;
