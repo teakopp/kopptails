@@ -29,6 +29,9 @@ class Nav extends React.Component<NavProps, NavState> {
     }
   };
 
+  expandMenuOptions = () =>{
+  }
+
   render() {
     let sideMenu;
     if (this.state.sidebarOpen) {

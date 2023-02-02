@@ -28,6 +28,9 @@ class App extends React.Component<{}, AppState> {
             changePageStatus={this.changePageStatus}
           />
         </header>
+	<div>
+	  <Filter pageStatus={this.state.pageStatus}/>
+	</div>
         <div>
           <Grid pageStatus={this.state.pageStatus} />
         </div>
