@@ -4,7 +4,8 @@ import "./item.css"
 // Export it so we can use it to define data
 // at grid level to typecheck data from request
 export interface ItemProps{
-  src:string
+  id:string;
+  src:string;
   title:string
   description:string
 }

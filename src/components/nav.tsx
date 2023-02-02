@@ -51,7 +51,6 @@ class Nav extends React.Component<NavProps, NavState> {
 	    <IconButton handleClick={this.handleClick} src={search} alt="search" />
 	  </div>
 	</div>
-	<div className="line"></div>
       </div>
     );
   }
