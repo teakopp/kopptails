@@ -19,9 +19,7 @@ class Grid extends React.Component<GridProps, GridState>{
     this.state = {gridData :[{ "id":"0","src":"", "title":"Test","description":"Test description"}]}
   }
 
-
-  async componentDidMount() {
-    if (this.props.pageStatus === "Suprise Me"){
+  getRandomDrinks = async () =>{
       const data = []
       // Picked number 6 because it seemed like that would be enough to fill page
       for (let i=0; i < 6; i++){
@@ -31,16 +29,37 @@ class Grid extends React.Component<GridProps, GridState>{
 	}
       }
       this.setState({gridData:data})
+  }
+
+  updateData = async () =>{
+    if (this.props.pageStatus === "Suprise Me"){
+      this.getRandomDrinks()
+    }
+    if (this.props.pageStatus === "Discover"){
+     const data =  [{ "id":"0","src":"", "title":"Test","description":"Test description"}]
+     this.setState({gridData:data})
+    }
+  }
+
+  async componentDidMount() {
+    await this.updateData()
+  }
+
+  componentDidUpdate(prevProps:GridProps) {
+
+    if (prevProps.pageStatus !== this.props.pageStatus) {
+      this.updateData()
     }
   }
 
 
-
    render(){
      return(
-     <div className="grid-container">
-      <div className="grid">
-	{this.state.gridData.map((item) =><Item id={item.id} title={item.title} src={item.src} description={item.description} />)}
+     <div>
+       <div className="grid-container">
+	<div className="grid">
+	  {this.state.gridData.map((item) =><Item id={item.id} title={item.title} src={item.src} description={item.description} />)}
+	</div>
       </div>
     </div>
      )

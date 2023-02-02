@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import Nav from "./components/nav";
 import Grid from "./components/grid";
+import Filter from "./components/filter"
 
 
 interface AppState{
@@ -16,7 +17,6 @@ class App extends React.Component<{},AppState>{
 
   changePageStatus = (status:string) => {
     this.setState({pageStatus:status})
-    console.log(status)
   }
 
   render(){
