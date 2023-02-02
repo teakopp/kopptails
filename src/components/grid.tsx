@@ -21,7 +21,7 @@ class Grid extends React.Component<GridProps, GridState>{
 
 
   async componentDidMount() {
-    if (this.props.pageStatus === "suprise me"){
+    if (this.props.pageStatus === "Suprise Me"){
       const data = []
       // Picked number 6 because it seemed like that would be enough to fill page
       for (let i=0; i < 6; i++){

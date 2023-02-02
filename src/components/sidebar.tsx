@@ -6,12 +6,13 @@ import IconButton from "./icon-button"
 
 interface SideBarProps{
   items: string[];
-  handleClick?: React.MouseEventHandler<HTMLImageElement>;
+  changePageStatus: Function;
+  handleClick: React.MouseEventHandler<HTMLImageElement>;
 }
 
 class SideBar extends React.Component<SideBarProps>{
   generateListItems = this.props.items.map((item, index) =>
-    <button className="sidebar-button" key={index}>{item}</button>
+    <button className="sidebar-button" key={index} onClick={e => this.props.changePageStatus((e.target as HTMLElement).innerText)}>{item}</button>
   )
     
   render(){

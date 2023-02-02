@@ -9,6 +9,7 @@ import IconButton from "./icon-button"
 interface NavProps {
   title: string;
   subtitle: string;
+  changePageStatus: Function;
 }
 
 interface NavState{
@@ -33,7 +34,7 @@ class Nav extends React.Component<NavProps, NavState> {
   render(){
     let sideMenu;
     if (this.state.sidebarOpen){
-     sideMenu = <SideBar items={["Discover","Suprise Me"]} handleClick={this.handleClick}/> 
+     sideMenu = <SideBar items={["Discover","Suprise Me"]} changePageStatus={this.props.changePageStatus}handleClick={this.handleClick}/> 
     }
     return (
       <div className="Nav">
@@ -45,6 +46,9 @@ class Nav extends React.Component<NavProps, NavState> {
 	  <div className="nav-item">
 	    <div className="nav-title">
 	      <div>{this.props.title}</div>
+	    </div>
+	    <div className="nav-subtitle">
+	      <div>{this.props.subtitle}</div>
 	    </div>
 	  </div>
 	  <div className="nav-item">
