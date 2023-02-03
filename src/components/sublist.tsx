@@ -1,32 +1,35 @@
 import React from "react";
 
-interface SubListProps{
-  isOpen: false;
-  dropDownButtonName:string;
-  buttons:string;
+interface SublistProps{
+  isOpen?: false;
+  mainItemName:string;
+  subListItemNames:string[];
 }
 
-class SubList extends React.Component<SubListProps>{
+class Sublist extends React.Component<SublistProps>{
 
   openList = async() =>{
   }
 
-  dropDownButton = (name:string) => {
-    <div className="dropdown-button"><button
-      className="sidebar-button"
-      onClick={}>
-      {this.props.dropDownButtonName}
-    </button></div>
-  }
-  
-  buttons = () =>{
-  }
-  
+  list = this.props.subListItemNames.map((item,index) => (
+      <div className="sublist-item" key={index}>
+	<button>{item}</button>
+      </div>
+  ))
+
   render(){
     return(
     <div className="sublist">
+    <button
+      className="sidebar-button"
+      onClick={this.openList}>
+      {this.props.mainItemName}
+    </button>
+    {this.list}
     </div>
     )
   }
   
 }
+
+export default Sublist

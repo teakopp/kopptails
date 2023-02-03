@@ -2,6 +2,7 @@ import React from "react";
 import "./sidebar.css";
 import closeButton from "../icons/x-solid.svg";
 import IconButton from "./icon-button";
+import Sublist from "./sublist"
 
 interface Item{
   name:string
@@ -15,40 +16,9 @@ interface SideBarProps {
 }
 
 class SideBar extends React.Component<SideBarProps> {
-  makeRegularButton = (item: Item,index:number) =>{
-    return (<div><button
-      className="sidebar-button"
-      key={index}
-      onClick={(e) =>
-        this.props.changePageStatus((e.target as HTMLElement).innerText)
-      }
-    >
-      {item.name}
-    </button></div>)
-  }
-  makeDropdownButton =(item: Item,index:number) =>{
-    return (<div className="dropdown"><button
-      className="sidebar-button dropdown-button"
-      key={index}
-      onClick={(e) =>
-        this.props.changePageStatus((e.target as HTMLElement).innerText)
-      }
-    >
-      {item.name}
-    </button></div>)
-  }
-
-  pickButton = (item: Item,index:number) =>{
-    if (item.dropdowns.length > 0){
-      return this.makeRegularButton(item,index)
-    }
-    else{
-      return this.makeRegularButton(item,index)
-    }
-  }
 
   generateListItems = this.props.items.map((item,index) => (
-    this.pickButton(item,index)
+    <Sublist mainItemName={item.name} subListItemNames={item.dropdowns}/>
   ))
   
 
