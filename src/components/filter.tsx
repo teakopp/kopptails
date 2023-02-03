@@ -16,6 +16,8 @@ interface FilterState {
 
 interface FilterProps {
   pageStatus: string;
+  filterStatus: string;
+  changeFilterStatus:Function;
 }
 
 class Filter extends React.Component<FilterProps, FilterState> {
@@ -63,7 +65,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	));
 	dropdown = (
 	  <div>
-	    <select className="filter-dropdown-select">{options}</select>
+	    <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
 	  </div>
 	);
      }
@@ -73,7 +75,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	));
 	dropdown = (
 	  <div>
-	    <select className="filter-dropdown-select">{options}</select>
+	    <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
 	  </div>
 	);
      }
@@ -85,7 +87,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	dropdown = (
 	<div>
 	  <div>
-	     <select className="filter-dropdown-select">{options}</select>
+	     <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))}  className="filter-dropdown-select">{options}</select>
 	  </div>
 	  </div>
 	);

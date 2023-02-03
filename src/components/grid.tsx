@@ -6,6 +6,7 @@ import { getRandomDrink, getDrinksByCategory,getDrinksByIngredient, getDrinksByS
 
 interface GridProps {
   pageStatus: string;
+  filterStatus: string;
 }
 
 interface GridState {

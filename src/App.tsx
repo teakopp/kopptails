@@ -6,17 +6,21 @@ import Filter from "./components/filter";
 
 interface AppState {
   pageStatus: string;
-  filter: string;
+  filterStatus: string;
 }
 
 class App extends React.Component<{}, AppState> {
   constructor(props = {}) {
     super(props);
-    this.state = { filter: "", pageStatus: "Suprise Me" };
+    this.state = { filterStatus: "", pageStatus: "Suprise Me" };
   }
 
-  changePageStatus = (status: string) => {
-    this.setState({ pageStatus: status });
+  changePageStatus = async (status: string) => {
+    this.setState({ pageStatus: status});
+  };
+
+  changeFilterStatus = async (status: string) => {
+    this.setState({ filterStatus: status});
   };
 
   render() {
@@ -30,10 +34,10 @@ class App extends React.Component<{}, AppState> {
           />
         </header>
 	<div>
-	  <Filter pageStatus={this.state.pageStatus}/>
+	  <Filter changeFilterStatus={this.changeFilterStatus} filterStatus={this.state.filterStatus} pageStatus={this.state.pageStatus}/>
 	</div>
         <div>
-          <Grid pageStatus={this.state.pageStatus} />
+          <Grid filterStatus={this.state.filterStatus} pageStatus={this.state.pageStatus} />
         </div>
       </div>
     );
