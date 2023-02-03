@@ -8,7 +8,10 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 200px;
+  border: 4px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
 }
 
 .nav-item {
@@ -25,7 +28,6 @@
   font-size: 32px;
 }
 
-.line {
-  border: 2px solid black;
-  border-radius: 1px;
+.nav-spacer{
+  padding-bottom: 200px;
 }

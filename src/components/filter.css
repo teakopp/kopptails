@@ -1,0 +1,24 @@
+.filter-buttons{
+  display:flex;
+  flex-direction: row;
+  justify-content:center;
+  padding: 80px;
+}
+
+.filter-button{
+  font-size: 32px;
+  text-align: left;
+  background-color: transparent;
+  transition-duration: 0.2s;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  padding: 20px;
+}
+
+
+.filter-button:hover {
+  background-color: black;
+  color: white;
+}

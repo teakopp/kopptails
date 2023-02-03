@@ -37,7 +37,7 @@ class Nav extends React.Component<NavProps, NavState> {
     if (this.state.sidebarOpen) {
       sideMenu = (
         <SideBar
-          items={["Discover", "Suprise Me"]}
+          items={[{"name":"Discover","dropdowns":["By Category","By Ingredient","By Serving Glass"]}, {"name":"Suprise Me","dropdowns":[]}]}
           changePageStatus={this.props.changePageStatus}
           handleClick={this.handleClick}
         />

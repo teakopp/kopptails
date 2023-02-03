@@ -29,12 +29,15 @@ class Filter extends React.Component<FilterProps, FilterState> {
       dropdown = (
         <div>
           <select>{options}</select>
+	  
         </div>
       );
     } else {
       dropdown = <div></div>;
     }
-    return <div>{dropdown}</div>;
+    return( 
+    <div className="filter-buttons">
+    </div>)
   }
 }
 
