@@ -65,7 +65,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	));
 	dropdown = (
 	  <div>
-	    <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
+	    <select  defaultValue="Ordinary Drink" onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
 	  </div>
 	);
      }
@@ -75,7 +75,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	));
 	dropdown = (
 	  <div>
-	    <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
+	    <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select><button className="select-button">Go</button>
 	  </div>
 	);
      }

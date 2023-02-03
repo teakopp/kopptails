@@ -39,16 +39,14 @@ class Grid extends React.Component<GridProps, GridState> {
     this.setState({ gridData: data });
   };
 
-
-
   updateData = async () => {
     if (this.props.pageStatus === "Suprise Me") {
       this.getRandomDrinks();
     }
-    if (this.props.pageStatus === "By Category") {
-      const category = "Cocktail" 
 
-      const res = await getDrinksByCategory(category);
+    if (this.props.pageStatus === "By Category") {
+      const filter = this.props.filterStatus || "Ordinary Drink"
+      const res = await getDrinksByCategory(filter);
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
@@ -59,29 +57,48 @@ class Grid extends React.Component<GridProps, GridState> {
       }
       this.setState({gridData:data})
     }
+
     if (this.props.pageStatus === "By Ingredient") {
-      const data = [
-        { id: "0", src: "", title: "Test", description: "Test description" },
-      ];
-      this.setState({ gridData: data });
+      console.log(this.props.filterStatus)
+      const res = await getDrinksByIngredient(this.props.filterStatus);
+      const data = [];
+      for (let i = 0; i < res.drinks.length; i++) {
+        data.push({
+          id: res.drinks[i].idDrink,
+          src: res.drinks[i].strDrinkThumb,
+          title: res.drinks[i].strDrink,
+        });
+      this.setState({gridData:data})
+      }
     }
+
     if (this.props.pageStatus === "By Serving Glass") {
-      const data = [
-        { id: "0", src: "", title: "Test", description: "Test description" },
-      ];
-      this.setState({ gridData: data });
+      const filter = this.props.filterStatus || "Highball glass" 
+      const res = await getDrinksByServingGlass (filter );
+      const data = [];
+      for (let i = 0; i < res.drinks.length; i++) {
+        data.push({
+          id: res.drinks[i].idDrink,
+          src: res.drinks[i].strDrinkThumb,
+          title: res.drinks[i].strDrink,
+        });
+      this.setState({gridData:data})
+      }
     }
-  };
+  }
 
   async componentDidMount() {
     await this.updateData();
   }
-
-  componentDidUpdate(prevProps: GridProps) {
+componentDidUpdate(prevProps: GridProps) {
     if (prevProps.pageStatus !== this.props.pageStatus) {
       this.updateData();
     }
+    if (prevProps.filterStatus!== this.props.filterStatus) {
+      this.updateData();
+    }
   }
+  
 
   render() {
     return (

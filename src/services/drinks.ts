@@ -7,7 +7,9 @@ export async function getRandomDrink() {
 }
 
 export async function getDrinksByCategory(category:string){
-  return httpGetCall(uri + `filter.php?c=${category}`)
+  const res = await httpGetCall(uri + `filter.php?c=${category}`)
+  console.log(res)
+  return res
 }
 
 export async function getDrinksByIngredient(ingredient:string){
