@@ -2,22 +2,7 @@ import React from "react";
 import "./grid.css";
 import Item from "./item";
 import { ItemProps } from "./item";
-import { getRandomDrink, getDrinksByIngredient, getDrinksByServingGlass } from "../services/drinks";
-
-interface DrinkData{
-  idDrink:string;
-  strDrinkThumb:string;
-  strDrink:string;
-  strInstructions:string;
-}
-
-interface GridData{
-  id:string;
-  src:string;
-  title:string;
-  description:string;
-}
-
+import { getRandomDrink, getDrinksByCategory,getDrinksByIngredient, getDrinksByServingGlass } from "../services/drinks";
 
 interface GridProps {
   pageStatus: string;
@@ -27,40 +12,32 @@ interface GridState {
   gridData: ItemProps[];
 }
 
-
 class Grid extends React.Component<GridProps, GridState> {
   constructor(props: GridProps) {
     super(props);
     this.state = {
       gridData: [
-        { id: "0", src: "", title: "Test", description: "Test description" },
+        { id: "0", src: "", title: "Test"},
       ],
     };
   }
 
-  // Made res any type because it didn't seem worth it to create an interface for axios call data
-  extractData = (drinks:DrinkData[]) => {
-      const data: GridData[] = [{"id":"","src":"","title":"","description":""}] 
-      for (let i = 0; i < drinks.length; i++) {
-        data.push({
-          id: drinks[i].idDrink,
-          src: drinks[i].strDrinkThumb,
-          title: drinks[i].strDrink,
-          description: drinks[i].strInstructions,
-        });
-      }
-      return data
-  }
-
   getRandomDrinks = async () => {
-    let data: GridData[] = [{"id":"","src":"","title":"","description":""}] 
+    const data = [];
     // Picked number 6 because it seemed like that would be enough to fill page
     for (let i = 0; i < 6; i++) {
       const res = await getRandomDrink();
-      data = this.extractData(res.drinks)
+      for (let i = 0; i < res.drinks.length; i++) {
+        data.push({
+          id: res.drinks[i].idDrink,
+          src: res.drinks[i].strDrinkThumb,
+          title: res.drinks[i].strDrink,
+        });
       }
+    }
     this.setState({ gridData: data });
   };
+
 
 
   updateData = async () => {
@@ -68,10 +45,18 @@ class Grid extends React.Component<GridProps, GridState> {
       this.getRandomDrinks();
     }
     if (this.props.pageStatus === "By Category") {
-      const data = [
-        { id: "0", src: "", title: "Tes", description: "Test description" },
-      ];
-      this.setState({ gridData: data });
+      const category = "Cocktail" 
+
+      const res = await getDrinksByCategory(category);
+      const data = [];
+      for (let i = 0; i < res.drinks.length; i++) {
+        data.push({
+          id: res.drinks[i].idDrink,
+          src: res.drinks[i].strDrinkThumb,
+          title: res.drinks[i].strDrink,
+        });
+      }
+      this.setState({gridData:data})
     }
     if (this.props.pageStatus === "By Ingredient") {
       const data = [
@@ -107,7 +92,6 @@ class Grid extends React.Component<GridProps, GridState> {
                 id={item.id}
                 title={item.title}
                 src={item.src}
-                description={item.description}
               />
             ))}
           </div>

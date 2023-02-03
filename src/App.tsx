@@ -6,12 +6,13 @@ import Filter from "./components/filter";
 
 interface AppState {
   pageStatus: string;
+  filter: string;
 }
 
 class App extends React.Component<{}, AppState> {
   constructor(props = {}) {
     super(props);
-    this.state = { pageStatus: "Suprise Me" };
+    this.state = { filter: "", pageStatus: "Suprise Me" };
   }
 
   changePageStatus = (status: string) => {

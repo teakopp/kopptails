@@ -7,7 +7,6 @@ export interface ItemProps {
   id: string;
   src: string;
   title: string;
-  description: string;
 }
 
 function Item(props: ItemProps) {
@@ -18,9 +17,6 @@ function Item(props: ItemProps) {
       </div>
       <div className="item-title-container">
         <p className="item-title">{props.title}</p>
-      </div>
-      <div className="item-description">
-        <p className="item-description">{props.description}</p>
       </div>
     </div>
   );
