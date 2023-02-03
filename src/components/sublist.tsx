@@ -1,32 +1,55 @@
 import React from "react";
 import "./sublist.css"
 
-interface SublistProps{
-  isOpen?: false;
-  mainItemName:string;
-  subListItemNames:string[];
+interface SublistState{
+  isOpen: boolean;
 }
 
-class Sublist extends React.Component<SublistProps>{
+interface SublistProps{
+  mainItemName:string;
+  sublistItemNames:string[];
+  changePageStatus:Function;
+}
 
-  openList = async() =>{
+class Sublist extends React.Component<SublistProps,SublistState>{
+
+  constructor(props:SublistProps){
+    super(props);
+    this.state = {isOpen:false}
+
   }
 
-  list = this.props.subListItemNames.map((item,index) => (
-      <div className="sublist-item" key={index}>
-	<button className="sublist-button">{item}</button>
+  toggleList = () =>{
+    if(this.state.isOpen){
+      this.setState({isOpen:false})
+    }
+    else{
+      this.setState({isOpen:true})
+    }
+  }
+
+  list = this.props.sublistItemNames.map((item,index) => (
+      <div className="sublist-item" key={index} >
+	<button onClick={(e) =>
+        this.props.changePageStatus((e.target as HTMLElement).innerText)
+      } className="sublist-button">{item}</button>
       </div>
   ))
 
   render(){
     return(
     <div className="sublist">
-    <button
-      className="sidebar-button"
-      onClick={this.openList}>
-      {this.props.mainItemName}
-    </button>
-    {this.list}
+      <button
+	onClick={this.toggleList}
+	className="sidebar-button"
+	>
+	{this.props.mainItemName}
+      </button>
+      <div className="sublist-items">
+	{ this.state.isOpen ? this.list
+	  :<div></div> 
+	}
+      </div>
     </div>
     )
   }

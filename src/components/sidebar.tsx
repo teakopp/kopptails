@@ -17,8 +17,29 @@ interface SideBarProps {
 
 class SideBar extends React.Component<SideBarProps> {
 
+  makeRegularButton = (item: Item,index:number) =>{
+    return (<div><button
+      className="sidebar-button"
+      key={index}
+      onClick={(e) =>
+        this.props.changePageStatus((e.target as HTMLElement).innerText)
+      }
+    >
+      {item.name}
+    </button></div>)
+  }
+
+  pickButton = (item: Item,index:number) =>{
+    if (item.dropdowns.length > 0){
+      return <Sublist changePageStatus={this.props.changePageStatus} mainItemName={item.name} sublistItemNames={item.dropdowns}/>
+    }
+    else{
+      return this.makeRegularButton(item,index)
+    }
+  }
+
   generateListItems = this.props.items.map((item,index) => (
-    <Sublist mainItemName={item.name} subListItemNames={item.dropdowns}/>
+    this.pickButton(item,index)
   ))
   
 
@@ -33,6 +54,7 @@ class SideBar extends React.Component<SideBarProps> {
           />
         </div>
         <div className="sidebar-list">{this.generateListItems}</div>
+        <div></div>
       </div>
     );
   }
