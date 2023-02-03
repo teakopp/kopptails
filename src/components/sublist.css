@@ -1,0 +1,15 @@
+.sublist-button{
+  font-size: 16px;
+  text-align: left;
+  background-color: transparent;
+  transition-duration: 0.2s;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.sublist-button:hover {
+  background-color: black;
+  color: white;
+}
