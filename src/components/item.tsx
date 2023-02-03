@@ -11,7 +11,7 @@ export interface ItemProps {
 
 function Item(props: ItemProps) {
   return (
-    <div className="item">
+    <div className="item" id="props.id">
       <div className="item-image-container">
         <img className="item-image" src={props.src} alt="" />
       </div>

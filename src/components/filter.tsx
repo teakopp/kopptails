@@ -50,10 +50,10 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	}
       }
 
+  // updating if props have changed and pageStatus has been updated
   async componentDidUpdate(prevProps: FilterProps) {
     if (prevProps.pageStatus !== this.props.pageStatus) {
-      const res = await this.updateData();
-      console.log(res)
+	await this.updateData();
     }
   }
 
@@ -87,7 +87,9 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	dropdown = (
 	<div>
 	  <div>
-	     <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))}  className="filter-dropdown-select">{options}</select>
+	     <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))}  className="filter-dropdown-select">
+	       {options}
+	     </select>
 	  </div>
 	  </div>
 	);

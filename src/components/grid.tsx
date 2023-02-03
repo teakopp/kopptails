@@ -51,9 +51,12 @@ class Grid extends React.Component<GridProps, GridState> {
     
     // These functions are all very similar. The only reason they aren't 
     // using the same function to unpack data is because typescript can make that
-    // a bit time consuming when dealing with multiple data return types
+    // a bit time consuming
     if (this.props.pageStatus === "By Category") {
-      const filter = this.props.filterStatus || "Ordinary Drink"
+      let filter = this.props.filterStatus 
+      if (!this.props.filterStatus){
+	filter = "Ordinary Drink"
+      }
       const res = await getDrinksByCategory(filter);
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
@@ -63,12 +66,15 @@ class Grid extends React.Component<GridProps, GridState> {
           title: res.drinks[i].strDrink,
         });
       }
-      this.setState({gridData:data})
+      await this.setState({gridData:data})
     }
 
     if (this.props.pageStatus === "By Ingredient") {
-      console.log(this.props.filterStatus)
-      const res = await getDrinksByIngredient(this.props.filterStatus);
+      let filter = this.props.filterStatus 
+      if (!this.props.filterStatus){
+	filter = "Light rum"
+      }
+      const res = await getDrinksByIngredient(filter);
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
@@ -76,13 +82,16 @@ class Grid extends React.Component<GridProps, GridState> {
           src: res.drinks[i].strDrinkThumb,
           title: res.drinks[i].strDrink,
         });
-      this.setState({gridData:data})
+      await this.setState({gridData:data})
       }
     }
 
     if (this.props.pageStatus === "By Serving Glass") {
-      const filter = this.props.filterStatus || "Highball glass" 
-      const res = await getDrinksByServingGlass (filter );
+      let filter = this.props.filterStatus || "Highball glass" 
+      if (!filter){
+	filter = "Highball glass"
+      }
+      const res = await getDrinksByServingGlass (filter);
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
@@ -90,18 +99,20 @@ class Grid extends React.Component<GridProps, GridState> {
           src: res.drinks[i].strDrinkThumb,
           title: res.drinks[i].strDrink,
         });
-      this.setState({gridData:data})
+      await this.setState({gridData:data})
       }
     }
   }
-  
 
-// This updates component when props have been updated
-// Instead of just waiting for state update to render
-// This is helpful because there are two states being passed in as
-// props that are updated with an outside function
+  async componentDidMount() {
+    await this.updateData();
+  }
 componentDidUpdate(prevProps: GridProps) {
-    if (prevProps.pageStatus !== this.props.pageStatus || prevProps.filterStatus!== this.props.filterStatus) {
+    if (prevProps.pageStatus !== this.props.pageStatus){
+      this.updateData();
+    }
+
+    if(prevProps.filterStatus!== this.props.filterStatus) {
       this.updateData();
     }
   }
