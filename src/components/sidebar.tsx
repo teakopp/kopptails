@@ -33,7 +33,6 @@ class SideBar extends React.Component<SideBarProps> {
           />
         </div>
         <div className="sidebar-list">{this.generateListItems}</div>
-        <div></div>
       </div>
     );
   }

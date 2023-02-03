@@ -1,4 +1,5 @@
 import React from "react";
+import "./sublist.css"
 
 interface SublistProps{
   isOpen?: false;
@@ -13,7 +14,7 @@ class Sublist extends React.Component<SublistProps>{
 
   list = this.props.subListItemNames.map((item,index) => (
       <div className="sublist-item" key={index}>
-	<button>{item}</button>
+	<button className="sublist-button">{item}</button>
       </div>
   ))
 
