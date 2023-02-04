@@ -14,11 +14,25 @@ class App extends React.Component<{}, AppState> {
     super(props);
     this.state = { filterStatus: "", pageStatus: "Suprise Me" };
   }
-
+  
+  // Tried to keep data in app pretty small
+  // so these two states were neccessary to control
+  // flow of data
+  //
+  // pageStatus are the categories the users can pick 
+  // in the sidebar. They control what kind of filters will be selected
+  // and generally control the change of pages
+  //
+  // Important to not change spelling of pageStatus options
   changePageStatus = async (status: string) => {
     this.setState({ pageStatus: status});
   };
-
+  
+  // Had to put this outside of filter component in order
+  // to make proper service calls in grid so correct data is pulled
+  //
+  // Todo use filters to avoid incorrect empty string from occaionally
+  // making their way into calls in grid.tsx. Then can remove blocking measures
   changeFilterStatus = async (status: string) => {
     this.setState({ filterStatus: status});
   };
