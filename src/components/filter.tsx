@@ -55,6 +55,8 @@ class Filter extends React.Component<FilterProps, FilterState> {
   }
 
 
+    // Important the only way to get to get any of the options to reset dropdown position
+    // Is to set a unique key so react has to re-render select. In this case I use pagestatue-pagestatus.
     categoryOptions = () => {
       let dropdown;
 	const options = this.state.data.categories.map((item, index) => (
@@ -104,6 +106,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	return dropdown
      }
 
+     // This is just so eveyrthing looks nicer
      pickOptions = () => {
 	if(this.props.pageStatus === "By Category"){
 	  return this.categoryOptions()
