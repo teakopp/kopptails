@@ -72,6 +72,12 @@ class Grid extends React.Component<GridProps, GridState> {
     if (this.props.pageStatus === "By Ingredient") {
       let filter = this.props.filterStatus 
       let res = await getDrinksByIngredient(filter);
+      // check to see if call failed. Sometimes incorrect filter (ex Old fashioned glass for ingriedients) is pulled
+      // from dropdown. If it was then make a second default call since everything
+      // defaults to select
+      //
+      // Todo use filter to make sure incorrect filters that shouldn't exist in pageStatus categories
+      // don't make it through
       if(!res.drinks){
 	res = await getDrinksByIngredient( "Light rum");
       }
@@ -93,7 +99,8 @@ class Grid extends React.Component<GridProps, GridState> {
       if(!res.drinks){
 	res = await getDrinksByIngredient("Highball glass");
       }
-
+      
+      // Loop through data and extrat it to just an array of string
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
