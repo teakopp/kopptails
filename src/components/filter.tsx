@@ -25,6 +25,7 @@ interface Filters{
 
 interface FilterState {
   data: Filters
+  lastPageStatus: string
 }
 
 interface FilterProps {
@@ -37,17 +38,15 @@ class Filter extends React.Component<FilterProps, FilterState> {
   
   constructor(props:FilterProps){
     super(props);
-    this.state = {data:{"categories": [{"strCategory":""}], "ingredients":[{"strIngredient1":""}],"glasses":[{"strGlass":""}]}}
+    this.state = { lastPageStatus: "", data:{"categories": [{"strCategory":""}], "ingredients":[{"strIngredient1":""}],"glasses":[{"strGlass":""}]}}
   }
-    
-    // Using switch here, but forgot how weird block scoping can be weird with it
-    // Works here but will likely use if statements elsewhere
+    // Grab all that sweet sweet filter data all at once so we
+    // only to make one call one time
     updateData = async () => {
 	  const categories = await getCategories()
 	  const ingredients = await getIngredients()
 	  const glasses = await getGlasses()
 	  const filterData = {"categories": categories.drinks, "ingredients":ingredients.drinks,"glasses":glasses.drinks}
-	  console.log(filterData)
 	  this.setState({data: filterData})
     }
 
@@ -55,47 +54,76 @@ class Filter extends React.Component<FilterProps, FilterState> {
     this.updateData()
   }
 
-  render() {
-    let dropdown;
-    if (this.props.pageStatus === "By Category"){
+
+    categoryOptions = () => {
+      let dropdown;
 	const options = this.state.data.categories.map((item, index) => (
-	  <option className="filter-dropdown-option">{item.strCategory}</option>
+	  <option key={index} className="filter-dropdown-option">{item.strCategory}</option>
 	));
 	dropdown = (
 	  <div>
-	    <select  defaultValue="Ordinary Drink" onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
+	    <select key={this.props.pageStatus+"-category"} defaultValue="Select" onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">
+	      <option className="filter-dropdown-option">Select</option>
+	      {options}
+	    </select>
 	  </div>
 	);
-     }
-    if (this.props.pageStatus === "By Ingredient"){
-	const options = this.state.data.ingredients.map((item, index) => (
-	  <option className="filter-dropdown-option">{item.strIngredient1}</option>
-	));
-	dropdown = (
-	  <div>
-	    <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">{options}</select>
-	  </div>
-	);
+	return dropdown
      }
 
-    if (this.props.pageStatus === "By Serving Glass"){
-	const options = this.state.data.glasses.map((item, index) => (
-	  <option className="filter-dropdown-option">{item.strGlass}</option>
+    ingredientOptions = () => {
+      let dropdown;
+	const options = this.state.data.ingredients.map((item, index) => (
+	  <option key={index} className="filter-dropdown-option">{item.strIngredient1}</option>
 	));
 	dropdown = (
-	<div>
 	  <div>
-	     <select onChange={(e)=>(this.props.changeFilterStatus(e.target.value))}  className="filter-dropdown-select">
-	       {options}
-	     </select>
-	  </div>
+	    <select key={this.props.pageStatus+"-ingredient"} defaultValue="Select" onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">
+	      <option className="filter-dropdown-option">Select</option>
+	      {options}
+	    </select>
 	  </div>
 	);
+	return dropdown
      }
+
+
+    glassOptions = () => {
+      let dropdown;
+	const options = this.state.data.glasses.map((item, index) => (
+	  <option key={index} className="filter-dropdown-option">{item.strGlass}</option>
+	));
+	dropdown = (
+	  <div>
+	    <select  key={this.props.pageStatus+"-glass"} defaultValue="Select" onChange={(e)=>(this.props.changeFilterStatus(e.target.value))} className="filter-dropdown-select">
+	      <option className="filter-dropdown-option">Select</option>
+	      {options}
+	    </select>
+	  </div>
+	);
+	return dropdown
+     }
+
+     pickOptions = () => {
+	if(this.props.pageStatus === "By Category"){
+	  return this.categoryOptions()
+	}
+	if(this.props.pageStatus === "By Ingredient"){
+	  return this.ingredientOptions()
+	}
+	if(this.props.pageStatus === "By Serving Glass"){
+	  return this.glassOptions()
+	}
+     }
+
+  
+
+  render() {
+    const options = this.pickOptions()
 
     return( 
     <div className="filter-buttons">
-      {dropdown}
+      {options}
     </div>)
   }
 }

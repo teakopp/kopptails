@@ -54,10 +54,10 @@ class Grid extends React.Component<GridProps, GridState> {
     // a bit time consuming
     if (this.props.pageStatus === "By Category") {
       let filter = this.props.filterStatus 
-      if (!this.props.filterStatus){
-	filter = "Ordinary Drink"
+      let res = await getDrinksByCategory(filter);
+      if(!res.drinks){
+	res = await getDrinksByIngredient( "Light rum");
       }
-      const res = await getDrinksByCategory(filter);
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
@@ -66,15 +66,15 @@ class Grid extends React.Component<GridProps, GridState> {
           title: res.drinks[i].strDrink,
         });
       }
-      await this.setState({gridData:data})
+      this.setState({gridData:data})
     }
 
     if (this.props.pageStatus === "By Ingredient") {
       let filter = this.props.filterStatus 
-      if (!this.props.filterStatus){
-	filter = "Light rum"
+      let res = await getDrinksByIngredient(filter);
+      if(!res.drinks){
+	res = await getDrinksByIngredient( "Light rum");
       }
-      const res = await getDrinksByIngredient(filter);
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
@@ -82,16 +82,18 @@ class Grid extends React.Component<GridProps, GridState> {
           src: res.drinks[i].strDrinkThumb,
           title: res.drinks[i].strDrink,
         });
-      await this.setState({gridData:data})
+      this.setState({gridData:data})
       }
     }
 
     if (this.props.pageStatus === "By Serving Glass") {
-      let filter = this.props.filterStatus || "Highball glass" 
-      if (!filter){
-	filter = "Highball glass"
+      let filter = this.props.filterStatus 
+      let res = await getDrinksByServingGlass (filter);
+
+      if(!res.drinks){
+	res = await getDrinksByIngredient("Highball glass");
       }
-      const res = await getDrinksByServingGlass (filter);
+
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
         data.push({
@@ -99,7 +101,7 @@ class Grid extends React.Component<GridProps, GridState> {
           src: res.drinks[i].strDrinkThumb,
           title: res.drinks[i].strDrink,
         });
-      await this.setState({gridData:data})
+      this.setState({gridData:data})
       }
     }
   }
@@ -107,15 +109,16 @@ class Grid extends React.Component<GridProps, GridState> {
   async componentDidMount() {
     await this.updateData();
   }
-componentDidUpdate(prevProps: GridProps) {
-    if (prevProps.pageStatus !== this.props.pageStatus){
-      this.updateData();
-    }
 
-    if(prevProps.filterStatus!== this.props.filterStatus) {
-      this.updateData();
+  componentDidUpdate(prevProps: GridProps) {
+      if (prevProps.pageStatus !== this.props.pageStatus){
+	this.updateData();
+      }
+
+      if(prevProps.filterStatus!== this.props.filterStatus) {
+	this.updateData();
+      }
     }
-  }
   
 
   render() {
