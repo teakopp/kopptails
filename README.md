@@ -1,8 +1,16 @@
-# Getting Started with Create React App
+# Kopptails
+
+Sorry for the pun.
+
+## What is this?
+
+An app that will let you manage all sorts of cocktail related knowledge provided by [Cocktail](https://www.thecocktaildb.com/)
+
+# Getting Started with Kopptails
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+So most of the scripts are the same.
 
 In the project directory, you can run:
 

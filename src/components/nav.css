@@ -2,9 +2,8 @@
 .nav-title {
   text-align: center;
   font-size: 100px;
-  font-weight:bold;
+  font-weight: bold;
 }
-
 
 .nav-subtitle {
   text-align: center;
@@ -36,6 +35,6 @@
   font-size: 32px;
 }
 
-.nav-spacer{
+.nav-spacer {
   padding-bottom: 200px;
 }

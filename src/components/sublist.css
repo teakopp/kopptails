@@ -1,4 +1,4 @@
-.sublist-button{
+.sublist-button {
   font-size: 24px;
   text-align: left;
   background-color: transparent;
@@ -7,7 +7,6 @@
   cursor: pointer;
   outline: none;
   width: 100%;
-
 }
 
 .sublist-button:hover {
@@ -15,7 +14,7 @@
   color: white;
 }
 
-.sidebar-button{
+.sidebar-button {
   text-align: left;
   background-color: transparent;
   transition-duration: 0.2s;
@@ -23,7 +22,6 @@
   cursor: pointer;
   outline: none;
   width: 100%;
-
 }
 
 .sidebar-button:hover {

@@ -1,11 +1,11 @@
-.filter-buttons{
-  display:flex;
+.filter-buttons {
+  display: flex;
   flex-direction: row;
-  justify-content:center;
+  justify-content: center;
   padding: 80px;
 }
 
-.filter-button{
+.filter-button {
   font-size: 32px;
   text-align: left;
   background-color: transparent;
@@ -17,15 +17,11 @@
   padding: 20px;
 }
 
-
 .filter-button:hover {
   background-color: black;
   color: white;
 }
 
-.filter-dropdown-select{
-  font-size:24px;
+.filter-dropdown-select {
+  font-size: 24px;
 }
-
-
-

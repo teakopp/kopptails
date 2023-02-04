@@ -2,7 +2,12 @@ import React from "react";
 import "./grid.css";
 import Item from "./item";
 import { ItemProps } from "./item";
-import { getRandomDrink, getDrinksByCategory,getDrinksByIngredient, getDrinksByServingGlass } from "../services/drinks";
+import {
+  getRandomDrink,
+  getDrinksByCategory,
+  getDrinksByIngredient,
+  getDrinksByServingGlass,
+} from "../services/drinks";
 
 interface GridProps {
   pageStatus: string;
@@ -17,9 +22,7 @@ class Grid extends React.Component<GridProps, GridState> {
   constructor(props: GridProps) {
     super(props);
     this.state = {
-      gridData: [
-        { id: "", src: "", title: ""},
-      ],
+      gridData: [{ id: "", src: "", title: "" }],
     };
   }
 
@@ -48,15 +51,15 @@ class Grid extends React.Component<GridProps, GridState> {
     if (this.props.pageStatus === "Suprise Me") {
       this.getRandomDrinks();
     }
-    
-    // These functions are all very similar. The only reason they aren't 
+
+    // These functions are all very similar. The only reason they aren't
     // using the same function to unpack data is because typescript can make that
     // a bit time consuming
     if (this.props.pageStatus === "By Category") {
-      let filter = this.props.filterStatus 
+      let filter = this.props.filterStatus;
       let res = await getDrinksByCategory(filter);
-      if(!res.drinks){
-	res = await getDrinksByIngredient( "Light rum");
+      if (!res.drinks) {
+        res = await getDrinksByIngredient("Light rum");
       }
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
@@ -66,11 +69,11 @@ class Grid extends React.Component<GridProps, GridState> {
           title: res.drinks[i].strDrink,
         });
       }
-      this.setState({gridData:data})
+      this.setState({ gridData: data });
     }
 
     if (this.props.pageStatus === "By Ingredient") {
-      let filter = this.props.filterStatus 
+      let filter = this.props.filterStatus;
       let res = await getDrinksByIngredient(filter);
       // check to see if call failed. Sometimes incorrect filter (ex Old fashioned glass for ingriedients) is pulled
       // from dropdown. If it was then make a second default call since everything
@@ -78,8 +81,8 @@ class Grid extends React.Component<GridProps, GridState> {
       //
       // Todo use filter to make sure incorrect filters that shouldn't exist in pageStatus categories
       // don't make it through
-      if(!res.drinks){
-	res = await getDrinksByIngredient( "Light rum");
+      if (!res.drinks) {
+        res = await getDrinksByIngredient("Light rum");
       }
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
@@ -88,18 +91,18 @@ class Grid extends React.Component<GridProps, GridState> {
           src: res.drinks[i].strDrinkThumb,
           title: res.drinks[i].strDrink,
         });
-      this.setState({gridData:data})
+        this.setState({ gridData: data });
       }
     }
 
     if (this.props.pageStatus === "By Serving Glass") {
-      let filter = this.props.filterStatus 
-      let res = await getDrinksByServingGlass (filter);
+      let filter = this.props.filterStatus;
+      let res = await getDrinksByServingGlass(filter);
 
-      if(!res.drinks){
-	res = await getDrinksByIngredient("Highball glass");
+      if (!res.drinks) {
+        res = await getDrinksByIngredient("Highball glass");
       }
-      
+
       // Loop through data and extrat it to just an array of string
       const data = [];
       for (let i = 0; i < res.drinks.length; i++) {
@@ -108,11 +111,11 @@ class Grid extends React.Component<GridProps, GridState> {
           src: res.drinks[i].strDrinkThumb,
           title: res.drinks[i].strDrink,
         });
-      this.setState({gridData:data})
+        this.setState({ gridData: data });
       }
     }
-  }
-  
+  };
+
   // Get all the data when component mounts
   async componentDidMount() {
     await this.updateData();
@@ -120,15 +123,14 @@ class Grid extends React.Component<GridProps, GridState> {
 
   // Re-render grid if pageStatus props changes
   componentDidUpdate(prevProps: GridProps) {
-      if (prevProps.pageStatus !== this.props.pageStatus){
-	this.updateData();
-      }
-
-      if(prevProps.filterStatus!== this.props.filterStatus) {
-	this.updateData();
-      }
+    if (prevProps.pageStatus !== this.props.pageStatus) {
+      this.updateData();
     }
-  
+
+    if (prevProps.filterStatus !== this.props.filterStatus) {
+      this.updateData();
+    }
+  }
 
   render() {
     return (
@@ -136,11 +138,7 @@ class Grid extends React.Component<GridProps, GridState> {
         <div className="grid-container">
           <div className="grid">
             {this.state.gridData.map((item) => (
-              <Item
-                id={item.id}
-                title={item.title}
-                src={item.src}
-              />
+              <Item id={item.id} title={item.title} src={item.src} />
             ))}
           </div>
         </div>

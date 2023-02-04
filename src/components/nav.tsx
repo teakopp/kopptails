@@ -29,15 +29,20 @@ class Nav extends React.Component<NavProps, NavState> {
     }
   };
 
-  expandMenuOptions = () =>{
-  }
+  expandMenuOptions = () => {};
 
   render() {
     let sideMenu;
     if (this.state.sidebarOpen) {
       sideMenu = (
         <SideBar
-          items={[{"name":"Discover","dropdowns":["By Category","By Ingredient","By Serving Glass"]}, {"name":"Suprise Me","dropdowns":[]}]}
+          items={[
+            {
+              name: "Discover",
+              dropdowns: ["By Category", "By Ingredient", "By Serving Glass"],
+            },
+            { name: "Suprise Me", dropdowns: [] },
+          ]}
           changePageStatus={this.props.changePageStatus}
           handleClick={this.handleClick}
         />
