@@ -105,11 +105,13 @@ class Grid extends React.Component<GridProps, GridState> {
       }
     }
   }
-
+  
+  // Get all the data when component mounts
   async componentDidMount() {
     await this.updateData();
   }
 
+  // Re-render grid if pageStatus props changes
   componentDidUpdate(prevProps: GridProps) {
       if (prevProps.pageStatus !== this.props.pageStatus){
 	this.updateData();

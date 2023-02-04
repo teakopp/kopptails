@@ -16,7 +16,11 @@ interface SideBarProps {
 }
 
 class SideBar extends React.Component<SideBarProps> {
-
+  
+  // Generate a regular button if no sublist items are
+  // This makes button directly clickable instead of collapseable
+  // onClick is bound to function to grab value from button
+  // for closing menu or changing page
   makeRegularButton = (item: Item,index:number) =>{
     return (<div><button
       className="sidebar-button"
@@ -29,7 +33,12 @@ class SideBar extends React.Component<SideBarProps> {
     </button></div>)
   }
 
+  // Decides what button will be picked
+  // Either sublist collapseable button or 
+  // regular clickable button
   pickButton = (item: Item,index:number) =>{
+    // if there are dropdown items included in prop data
+    // make it a sublist
     if (item.dropdowns.length > 0){
       return <Sublist changePageStatus={this.props.changePageStatus} mainItemName={item.name} sublistItemNames={item.dropdowns}/>
     }
@@ -37,7 +46,8 @@ class SideBar extends React.Component<SideBarProps> {
       return this.makeRegularButton(item,index)
     }
   }
-
+  
+  // put all the items together to be rendered
   generateListItems = this.props.items.map((item,index) => (
     this.pickButton(item,index)
   ))

@@ -106,7 +106,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
 	return dropdown
      }
 
-     // This is just so eveyrthing looks nicer
+     // This is just so everything looks nicer
      pickOptions = () => {
 	if(this.props.pageStatus === "By Category"){
 	  return this.categoryOptions()

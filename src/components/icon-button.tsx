@@ -7,6 +7,7 @@ interface ButtonProps {
   handleClick?: React.MouseEventHandler<HTMLImageElement>;
 }
 
+// Resuable Icon button
 function IconButton(props: ButtonProps) {
   return (
     <button className="icon-button">
