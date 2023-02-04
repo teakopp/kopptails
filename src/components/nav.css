@@ -1,7 +1,15 @@
 /*Title for nav page*/
 .nav-title {
   text-align: center;
-  font-size: 64px;
+  font-size: 100px;
+  font-weight:bold;
+}
+
+
+.nav-subtitle {
+  text-align: center;
+  font-size: 50px;
+  font-style: italic;
 }
 
 .nav-container {
