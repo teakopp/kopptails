@@ -22,10 +22,9 @@ class SideBar extends React.Component<SideBarProps> {
   // for closing menu or changing page
   makeRegularButton = (item: Item, index: number) => {
     return (
-      <div>
+      <div key={index}>
         <button
           className="sidebar-button"
-          key={index}
           onClick={(e) =>
             this.props.changePageStatus((e.target as HTMLElement).innerText)
           }
@@ -44,11 +43,13 @@ class SideBar extends React.Component<SideBarProps> {
     // make it a sublist
     if (item.dropdowns.length > 0) {
       return (
+      <div key={index}>
         <Sublist
           changePageStatus={this.props.changePageStatus}
           mainItemName={item.name}
           sublistItemNames={item.dropdowns}
         />
+	</div>
       );
     } else {
       return this.makeRegularButton(item, index);
@@ -71,7 +72,6 @@ class SideBar extends React.Component<SideBarProps> {
           />
         </div>
         <div className="sidebar-list">{this.generateListItems}</div>
-        <div></div>
       </div>
     );
   }

@@ -22,5 +22,5 @@ it("Menu opens on click", () => {
   render(<Nav title="Nope" subtitle="Correct" />);
   fireEvent.click(screen.getByAltText(/menu/i));
   const element = screen.getByAltText(/close/i);
-  expect(element).toBeInTheDcument();
+  expect(element).toBeInTheDocument();
 });
