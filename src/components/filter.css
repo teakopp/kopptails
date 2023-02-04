@@ -25,23 +25,7 @@
 
 .filter-dropdown-select{
   font-size:24px;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-  background-color: transparent;
-  color: black;
 }
 
 
-.filter-dropdown-option{
-  background-color: black;
-  color: white;
-}
-
-
-.filter-dropdown-select:hover {
-  background-color: black;
-  color: white;
-}
 
