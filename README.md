@@ -4,7 +4,7 @@ Sorry for the pun.
 
 ## What is this?
 
-An app that will let you manage all sorts of cocktail related knowledge provided by [Cocktail](https://www.thecocktaildb.com/)
+An app that will let you manage all sorts of cocktail related knowledge provided by [CocktailDB](https://www.thecocktaildb.com/)
 
 # Getting Started with Kopptails
 
