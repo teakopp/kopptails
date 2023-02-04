@@ -11,7 +11,7 @@ interface Item {
 
 interface SideBarProps {
   items: Item[];
-  changePageStatus: Function;
+  changePageStatus: any;
   handleClick: React.MouseEventHandler<HTMLImageElement>;
 }
 

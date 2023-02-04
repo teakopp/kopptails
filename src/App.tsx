@@ -9,7 +9,11 @@ interface AppState {
   filterStatus: string;
 }
 
-class App extends React.Component<{}, AppState> {
+// Using any as type here because eslint is very unhappy with {}
+// but ok with any. 
+//
+// Todo find type for this
+class App extends React.Component<any, AppState> {
   constructor(props = {}) {
     super(props);
     this.state = { filterStatus: "", pageStatus: "Suprise Me" };

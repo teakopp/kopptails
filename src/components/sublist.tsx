@@ -8,7 +8,7 @@ interface SublistState {
 interface SublistProps {
   mainItemName: string;
   sublistItemNames: string[];
-  changePageStatus: Function;
+  changePageStatus: any;
 }
 
 class Sublist extends React.Component<SublistProps, SublistState> {

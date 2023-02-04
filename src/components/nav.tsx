@@ -8,7 +8,7 @@ import IconButton from "./icon-button";
 interface NavProps {
   title: string;
   subtitle: string;
-  changePageStatus: Function;
+  changePageStatus: any;
 }
 
 interface NavState {
@@ -29,7 +29,6 @@ class Nav extends React.Component<NavProps, NavState> {
     }
   };
 
-  expandMenuOptions = () => {};
 
   render() {
     let sideMenu;

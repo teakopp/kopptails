@@ -56,8 +56,7 @@ class Grid extends React.Component<GridProps, GridState> {
     // using the same function to unpack data is because typescript can make that
     // a bit time consuming
     if (this.props.pageStatus === "By Category") {
-      let filter = this.props.filterStatus;
-      let res = await getDrinksByCategory(filter);
+      let res = await getDrinksByCategory(this.props.filterStatus);
       if (!res.drinks) {
         res = await getDrinksByIngredient("Light rum");
       }
@@ -73,8 +72,7 @@ class Grid extends React.Component<GridProps, GridState> {
     }
 
     if (this.props.pageStatus === "By Ingredient") {
-      let filter = this.props.filterStatus;
-      let res = await getDrinksByIngredient(filter);
+      let res = await getDrinksByIngredient(this.props.filterStatus);
       // check to see if call failed. Sometimes incorrect filter (ex Old fashioned glass for ingriedients) is pulled
       // from dropdown. If it was then make a second default call since everything
       // defaults to select
@@ -96,8 +94,7 @@ class Grid extends React.Component<GridProps, GridState> {
     }
 
     if (this.props.pageStatus === "By Serving Glass") {
-      let filter = this.props.filterStatus;
-      let res = await getDrinksByServingGlass(filter);
+      let res = await getDrinksByServingGlass(this.props.filterStatus);
 
       if (!res.drinks) {
         res = await getDrinksByIngredient("Highball glass");
@@ -137,8 +134,8 @@ class Grid extends React.Component<GridProps, GridState> {
       <div>
         <div className="grid-container">
           <div className="grid">
-            {this.state.gridData.map((item) => (
-              <Item id={item.id} title={item.title} src={item.src} />
+            {this.state.gridData.map((item, index) => (
+              <Item key={index} id={item.id} title={item.title} src={item.src} />
             ))}
           </div>
         </div>

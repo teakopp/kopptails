@@ -30,7 +30,7 @@ interface FilterState {
 interface FilterProps {
   pageStatus: string;
   filterStatus: string;
-  changeFilterStatus: Function;
+  changeFilterStatus: any;
 }
 
 class Filter extends React.Component<FilterProps, FilterState> {
@@ -66,13 +66,12 @@ class Filter extends React.Component<FilterProps, FilterState> {
   // Important the only way to get to get any of the options to reset dropdown position
   // Is to set a unique key so react has to re-render select. In this case I use pagestatue-pagestatus.
   categoryOptions = () => {
-    let dropdown;
     const options = this.state.data.categories.map((item, index) => (
       <option key={index} className="filter-dropdown-option">
         {item.strCategory}
       </option>
     ));
-    dropdown = (
+   const dropdown = (
       <div>
         <select
           key={this.props.pageStatus + "-category"}
@@ -89,13 +88,12 @@ class Filter extends React.Component<FilterProps, FilterState> {
   };
 
   ingredientOptions = () => {
-    let dropdown;
     const options = this.state.data.ingredients.map((item, index) => (
       <option key={index} className="filter-dropdown-option">
         {item.strIngredient1}
       </option>
     ));
-    dropdown = (
+    const dropdown = (
       <div>
         <select
           key={this.props.pageStatus + "-ingredient"}
@@ -112,13 +110,12 @@ class Filter extends React.Component<FilterProps, FilterState> {
   };
 
   glassOptions = () => {
-    let dropdown;
     const options = this.state.data.glasses.map((item, index) => (
       <option key={index} className="filter-dropdown-option">
         {item.strGlass}
       </option>
     ));
-    dropdown = (
+    const dropdown = (
       <div>
         <select
           key={this.props.pageStatus + "-glass"}
