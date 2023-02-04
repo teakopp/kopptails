@@ -39,12 +39,14 @@ class Sublist extends React.Component<SublistProps,SublistState>{
   render(){
     return(
     <div className="sublist">
-      <button
-	onClick={this.toggleList}
-	className="sidebar-button"
-	>
-	{this.props.mainItemName}
-      </button>
+      <div className="sidebar-button-container">
+	<button
+	  onClick={this.toggleList}
+	  className="sidebar-button"
+	  >
+	  {this.props.mainItemName}
+	</button>
+      </div>
       <div className="sublist-items">
 	{ this.state.isOpen ? this.list
 	  :<div></div> 
