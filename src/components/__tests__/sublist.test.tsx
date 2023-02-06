@@ -7,17 +7,20 @@ afterEach(() => {
 });
 
 it("Renders main item name propely", () => {
-  render(<Sublist mainItemName="Correct" sublistItemNames={["Ok","Alright"]} />);
+  render(
+    <Sublist mainItemName="Correct" sublistItemNames={["Ok", "Alright"]} />
+  );
   const element = screen.getByText(/Correct/i);
   expect(element).toBeInTheDocument();
 });
 
 it("Renders sublist propely", () => {
-  render(<Sublist mainItemName="Correct" sublistItemNames={["Ok","Alright"]} />);
+  render(
+    <Sublist mainItemName="Correct" sublistItemNames={["Ok", "Alright"]} />
+  );
   fireEvent.click(screen.getByText(/Correct/i));
   const element = screen.getByText(/Ok/i);
   expect(element).toBeInTheDocument();
   const elementTwo = screen.getByText(/Alright/i);
   expect(elementTwo).toBeInTheDocument();
 });
-

@@ -43,13 +43,13 @@ class SideBar extends React.Component<SideBarProps> {
     // make it a sublist
     if (item.dropdowns.length > 0) {
       return (
-      <div key={index}>
-        <Sublist
-          changePageStatus={this.props.changePageStatus}
-          mainItemName={item.name}
-          sublistItemNames={item.dropdowns}
-        />
-	</div>
+        <div key={index}>
+          <Sublist
+            changePageStatus={this.props.changePageStatus}
+            mainItemName={item.name}
+            sublistItemNames={item.dropdowns}
+          />
+        </div>
       );
     } else {
       return this.makeRegularButton(item, index);

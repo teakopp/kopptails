@@ -71,7 +71,7 @@ class Filter extends React.Component<FilterProps, FilterState> {
         {item.strCategory}
       </option>
     ));
-   const dropdown = (
+    const dropdown = (
       <div>
         <select
           key={this.props.pageStatus + "-category"}

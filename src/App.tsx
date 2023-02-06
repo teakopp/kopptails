@@ -10,7 +10,7 @@ interface AppState {
 }
 
 // Using any as type here because eslint is very unhappy with {}
-// but ok with any. 
+// but ok with any.
 //
 // Todo find type for this
 class App extends React.Component<any, AppState> {

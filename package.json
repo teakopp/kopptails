@@ -22,8 +22,13 @@
     "build": "tsc; react-scripts build",
     "format": "npx prettier --write .",
     "lint": "npx eslint.",
-    "test": "tsc; react-scripts test",
+    "test": "tsc; react-scripts test  --transformIgnorePatterns \"node_modules/(?!axios)/\"",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   },
   "eslintConfig": {
     "extends": [

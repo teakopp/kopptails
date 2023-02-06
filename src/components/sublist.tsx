@@ -28,7 +28,7 @@ class Sublist extends React.Component<SublistProps, SublistState> {
   list = this.props.sublistItemNames.map((item, index) => (
     <div className="sublist-item" key={index}>
       <button
-	key={index}
+        key={index}
         onClick={(e) =>
           this.props.changePageStatus((e.target as HTMLElement).innerText)
         }
@@ -43,7 +43,11 @@ class Sublist extends React.Component<SublistProps, SublistState> {
     return (
       <div className="sublist">
         <div className="sidebar-button-container">
-          <button key={this.props.mainItemName} onClick={this.toggleList} className="sidebar-button">
+          <button
+            key={this.props.mainItemName}
+            onClick={this.toggleList}
+            className="sidebar-button"
+          >
             {this.props.mainItemName}
           </button>
         </div>

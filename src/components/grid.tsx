@@ -2,6 +2,7 @@ import React from "react";
 import "./grid.css";
 import Item from "./item";
 import { ItemProps } from "./item";
+import loadingIcon from "../images/Eclipse-1s-200px.svg"
 import {
   getRandomDrink,
   getDrinksByCategory,
@@ -16,13 +17,15 @@ interface GridProps {
 
 interface GridState {
   gridData: ItemProps[];
+  isLoading: boolean;
 }
 
 class Grid extends React.Component<GridProps, GridState> {
   constructor(props: GridProps) {
     super(props);
     this.state = {
-      gridData: [{ id: "", src: "", title: "" }],
+      isLoading: true,
+      gridData: [],
     };
   }
 
@@ -116,6 +119,7 @@ class Grid extends React.Component<GridProps, GridState> {
   // Get all the data when component mounts
   async componentDidMount() {
     await this.updateData();
+    await this.setState({isLoading: false})
   }
 
   // Re-render grid if pageStatus props changes
@@ -132,13 +136,15 @@ class Grid extends React.Component<GridProps, GridState> {
   render() {
     return (
       <div>
-        <div className="grid-container">
+	{this.state.isLoading ? 
+	<div className="loading-icon-container"><img src={loadingIcon}/></div>
+        :<div className="grid-container">
           <div className="grid">
             {this.state.gridData.map((item, index) => (
               <Item key={index} id={item.id} title={item.title} src={item.src} />
             ))}
           </div>
-        </div>
+        </div>}
       </div>
     );
   }

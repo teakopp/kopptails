@@ -29,7 +29,6 @@ class Nav extends React.Component<NavProps, NavState> {
     }
   };
 
-
   render() {
     let sideMenu;
     if (this.state.sidebarOpen) {
